@@ -17,7 +17,7 @@ const CreatePrompt = () => {
   const createPrompt = async (e) => {};
 
   return (
-    <From
+    <Form
       type="Create"
       post={post}
       setPost={setPost}
