@@ -4,9 +4,16 @@ import { useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
+import { setConfig } from "next/config";
 
 const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   const [copied, setcopied] = useState("");
+
+  const handleCopy = () => {
+    setcopied(post.prompt);
+    navigator.clipboard.writeText(post.prompt);
+    setTimeout(() => setcopied(""), 3000);
+  };
 
   return (
     <div className="prompt_card">
@@ -30,11 +37,11 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
           </div>
         </div>
 
-        <div className="copy_btn" onClick={() => {}}>
+        <div className="copy_btn" onClick={handleCopy}>
           <Image
             src={
               copied === post.prompt
-                ? "/assets/icons.tick.svg"
+                ? "/assets/icons/tick.svg"
                 : "/assets/icons/copy.svg"
             }
             width={12}
@@ -42,6 +49,14 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
           />
         </div>
       </div>
+
+      <p className="my-4 font-satoshi text-sm text-gray-700">{post.prompt}</p>
+      <p
+        className="font-inter text-sm blue_gradient cursor-pointer"
+        onClick={() => handleTagClick() && handleTagClick(post.tag)}
+      >
+        {post.tag}
+      </p>
     </div>
   );
 };
