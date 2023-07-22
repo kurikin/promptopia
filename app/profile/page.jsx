@@ -22,6 +22,7 @@ const MyProfile = () => {
 
     fetchPosts();
   }, []);
+
   const handleEdit = () => {};
 
   const handleDelete = async () => {};
